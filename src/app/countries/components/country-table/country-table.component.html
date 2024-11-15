@@ -1,0 +1,35 @@
+<div *ngIf="countries.length === 0" class="alert alert-warning text-center">
+    No hay paises que mostrar
+</div>
+
+<div #table *ngIf="countries.length > 0" >
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Banderas</th>
+                <th>Nombre</th>
+                <th>Capital</th>
+                <th>Población</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                @for (item of countries; track item.name; let idx = $index) {
+                    <tr>
+                    <td>{{idx + 1}}</td>
+                    <td><img [src]="item.flags.svg" [alt]="item.name.common"></td>
+                    <td>{{item.name.official}}</td>
+                    <td>{{item.capital}}</td>
+                    <td>{{item.population  | number}}</td>
+                    <td>
+                        <a [routerLink]="['/countries/by', item.cca2]">Ver más</a>
+                    </td>
+                </tr>
+                    } @empty {
+                    <li>There are no items.</li>
+                    }
+        </tbody>
+    </table>
+</div>
